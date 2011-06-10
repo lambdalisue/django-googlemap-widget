@@ -16,7 +16,7 @@ setup(
         name="django-googlemap",
         version=version,
         description = "Googlemap field, widget, model for Django",
-        long_description=read('README.mkd'),
+        long_description=read('README.rst'),
         classifiers = [
             'Intended Audience :: Developers',
             'License :: OSI Approved :: BSD License',
