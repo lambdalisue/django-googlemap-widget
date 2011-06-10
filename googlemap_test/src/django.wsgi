@@ -9,7 +9,7 @@ path_list = [
 for path in path_list:
     if path not in sys.path:
         sys.path.append(path)
-os.environ['DJANGO_SETTINGS_MODULE'] = 'universaltag_test.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'googlemap_test.settings'
 
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
