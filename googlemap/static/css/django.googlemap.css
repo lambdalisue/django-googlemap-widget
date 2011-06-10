@@ -1,0 +1,14 @@
+@charset "utf-8"
+
+.django-googlemap-surface a.button{
+	display: block;
+	width: 16px;
+	height: 16px;
+	background: red;
+}
+.django-googlemap-surface a.button.open{
+	background: url(image/django.googlemap.open.png) no-repeat;
+}
+.django-googlemap-surface a.button.close{
+	background: url(image/django.googlemap.close.png) no-repeat;
+}

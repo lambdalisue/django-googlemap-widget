@@ -1,0 +1,35 @@
+{% load googlemap_tags %}
+<!Doctype HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf8">
+		<title>Django Googlemap</title>
+		<link type="text/css" rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/baseline.compress.css">
+		<link type="text/css" rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/layout.css">
+		<link type="text/css" rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/pepper-grinder/jquery-ui-1.8.5.custom.css">
+		<script type="text/javascript" src="{{ STATIC_URL }}javascript/html5.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery-1.6.1.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery-ui-1.8.5.full.min.js"></script>
+		{% render_googlemap_head %}
+		{% block head %}
+		{% endblock %}
+	</head>
+	<body>
+		<div id="container">
+			<header>
+				<h1><a href="/">Django Googlemap</a></h1>
+				<p>Use googlemap on your Django app</p>
+			</header>
+			<nav id="admin"><a href="/admin/" title="Open Django Admin site" target="_blank">Admin</a></nav>
+			{% block introduction %}
+			{% endblock %}
+			<section id="content">
+				{% block content %}
+				{% endblock %}
+			</section>
+			<footer>
+				Copyright &copy; 2011 Alisue allright reserved.
+			</footer>
+		</div>
+	</body>
+</html>

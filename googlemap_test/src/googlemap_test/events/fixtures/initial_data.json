@@ -1,0 +1,4 @@
+[
+{"pk": 1, "model": "events.entry", "fields": {"title": "Meeting at Tokyo tower", "start": "2011-08-01 11:30", "place": "東京都港区芝公園4-2-8", "location": "35.6587039, 139.7454081, 15"}},
+{"pk": 2, "model": "events.entry", "fields": {"title": "Meeting at Skytree", "start": "2011-08-01 11:30", "place": "東京都墨田区押上1丁目", "location": "35.7105827, 139.8114876, 15"}}
+]

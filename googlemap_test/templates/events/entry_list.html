@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block introduction %}
+<section id="introduction">
+	<h2>Introduction</h2>
+	
+	<p>Tagging is really important feature for web application now. I tried to find Django library for tagging but I could not find anything
+		to fit my image. I want the features below for library</p>
+	<ul>
+		<li>Using generic relation so the tag can be stick anything.</li>
+		<li>Sortable. Tags contain the order information for object which the tag stick.</li>
+		<li>Anonymous user can add or delete tags as many as they want.</li>
+		<li>Freezable. In my opinion, the tag can be add/delete by anonymous user but sometime author of object want to lock the tag from deleting.</li>
+	</ul>
+	
+	<p>First time, I tried to recomponent <a href="http://code.google.com/p/django-tagging/">django-tagging</a> to fit my opinion but soon I found it is
+		more difficult than to create my own library. Too make Ajax feature, I use <a href="https://bitbucket.org/jespern/django-piston/wiki/Home">django-piston</a>
+		library but the library is a little bit buggy so I folked the library and fix it. So use my <a href="https://bitbucket.org/lambdalisue/django-piston">falked one</a> to
+		use with this library. The links below is what required to run this library.</p>
+	
+	<ul>
+		<li><a href="https://bitbucket.org/lambdalisue/django-piston">Falked django-piston</a></li>
+		<li><a href="http://jquery.com/">jQuery - JavaScript library</a></li>
+		<li><a href="http://jqueryui.com/">jQuery UI - To be able the sortable feature and autocomplement feature.</a></li>
+	</ul>
+	
+	<p>This library default skin use <a href="http://www.webdesignerdepot.com">Reflection Icon Set by Webdesigner Depot</a>. Thanks for them really nice pictures.</p>
+</section>
+{% endblock %}
+
+{% block content %}
+<h2>Demo</h2>
+<p>Click a pencil icon belong to each blog post, input tags to input field and then hit enter to post tag. 
+	To test Freeze feature, Login as guest (password=guest) via clicking Tag icon stack on top of this page.</p>
+<hr>
+{% for entry in object_list %}
+<article class="entry">
+	<h3><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h3>
+	<table>
+		<tr>
+			<td>Start</td>
+			<td>{{ entry.start|date }}</td>
+		</tr>
+		<tr>
+			<td>Place</td>
+			<td>{{ entry.place }}</td>
+		</tr>
+	</table>
+	{{ entry.get_location_display }}
+</article>
+{% endfor %}
+{% endblock %}
