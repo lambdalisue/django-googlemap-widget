@@ -6,32 +6,32 @@
 #
 from setuptools import setup, find_packages
 
-version = "0.1rc1"
+version = "0.1rc2"
 
 def read(filename):
     import os.path
     return open(os.path.join(os.path.dirname(__file__), filename)).read()
 
 setup(
-        name="django-googlemap",
-        version=version,
-        description = "Googlemap field, widget, model for Django",
-        long_description=read('README.rst'),
-        classifiers = [
-            'Intended Audience :: Developers',
-            'License :: OSI Approved :: BSD License',
-            'Programming Language :: Python',
-            'Topic :: Internet :: WWW/HTTP',
-        ],
-        keywords = "django googlemap map ajax",
-        author = "Alisue",
-        author_email = "lambdalisue@hashnote.net",
-        url=r"https://github.com/lambdalisue/django-googlemap",
-        download_url = r"https://github.com/lambdalisue/django-googlemap/tarball/master",
-        license = 'BSD',
-        packages = find_packages(),
-        include_package_data = True,
-        zip_safe = True,
-        install_requires=['setuptools',],
+    name="django-googlemap-widget",
+    version=version,
+    description = "Googlemap field, widget, model for Django",
+    long_description=read('README.rst'),
+    classifiers = [
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Programming Language :: Python',
+        'Topic :: Internet :: WWW/HTTP',
+    ],
+    keywords = "django googlemap map ajax",
+    author = "Alisue",
+    author_email = "lambdalisue@hashnote.net",
+    url=r"https://github.com/lambdalisue/django-googlemap-widget",
+    download_url = r"https://github.com/lambdalisue/django-googlemap-widget/tarball/master",
+    license = 'BSD',
+    packages = find_packages(),
+    include_package_data = True,
+    zip_safe = True,
+    install_requires=['setuptools',],
 )
 
