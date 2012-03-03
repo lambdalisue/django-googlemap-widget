@@ -30,8 +30,8 @@ class GoogleMapField(models.Field):
             return ''
         return Location.parse(value)
     
-    def get_db_prep_value(self, value, connection, prepared=False):
-        return super(GoogleMapField, self).get_db_prep_value(str(value), connection, prepared)
+    def get_db_prep_value(self, value, *args, **kwargs):
+        return super(GoogleMapField, self).get_db_prep_value(str(value), *args, **kwargs)
         
     def get_internal_type(self):
         return 'CharField'
