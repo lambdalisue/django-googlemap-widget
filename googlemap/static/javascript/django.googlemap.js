@@ -18,8 +18,8 @@
 			query: {
 				submit: {
 					src:		"/static/image/django.googlemap.submit.png",
-					alt:		"Submid address to map",
-					title:		"Submid address to map"
+					alt:		"Submit address to map",
+					title:		"Submit address to map"
 				},
 				loading: {
 					src:		"/static/image/django.googlemap.loading.gif",
@@ -52,7 +52,7 @@
 			var $longitude = $surface.attr('longitudeID') ? $("#" + $surface.attr('longitudeID')) : undefined;
 			var $zoom = $surface.attr('zoomID') ? $("#" + $surface.attr('zoomID')) : undefined;
 			var $query = $surface.attr('queryID') ? $("#" + $surface.attr('queryID')) : undefined;
-			var $show = $('<a>').attr({href: 'javascript:void(0);'});
+			var $show = $('<a>').attr({href: "javascript:void(0);"});
 			var $hide = $('<a>').attr({href: "javascript:void(0);"});
 			var gmap;
 			var marker;
@@ -66,7 +66,7 @@
 				return latlng;
 			}
 			function placeMarker(location){
-				//var latlng = undefined;
+				var latlng;
 				if (location === undefined){
 					latlng = getInitialLocation();
 				}
@@ -83,7 +83,7 @@
 				var options = {
 					zoom: parseInt($surface.attr('zoom')),
 					scaleControl: false,
-					center:latlng,
+					center: latlng,
 					mapTypeId:	google.maps.MapTypeId.ROADMAP
 				};
 
