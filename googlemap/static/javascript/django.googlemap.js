@@ -1,11 +1,11 @@
 /*
  * jQuery django-googlemapfield plugin
- * 
- * Author: 		giginet
+ *
+ * Author:		giginet
  * Inspector:	alisue
- * 
+ *
  * Version: 0.1.0
- * 
+ *
  */
 (function($){
 	$.fn.googlemap = function(settings){
@@ -18,8 +18,8 @@
 			query: {
 				submit: {
 					src:		"/static/image/django.googlemap.submit.png",
-					alt:		"Submid address to a map",
-					title:		"Submid address to a map"
+					alt:		"Submid address to map",
+					title:		"Submid address to map"
 				},
 				loading: {
 					src:		"/static/image/django.googlemap.loading.gif",
@@ -27,20 +27,20 @@
 				},
 				error: {
 					src:		"/static/image/django.googlemap.error.png",
-					alt:		"Failed to submit address to a map",
-					title:		"Failed to submit address to a map"
+					alt:		"Failed to submit address to map",
+					title:		"Failed to submit address to map"
 				}
 			},
 			visibility: {
 				show: {
 					src:		"/static/image/django.googlemap.show.png",
-					alt:		"Shwo a map",
-					title:		"Show a map"
+					alt:		"Show map",
+					title:		"Show map"
 				},
 				hide: {
 					src:		"/static/image/django.googlemap.hide.png",
-					alt:		"Hide a map",
-					title:		"Hide a map"
+					alt:		"Hide map",
+					title:		"Hide map"
 				}
 			},
 			debug:	true
@@ -53,7 +53,7 @@
 			var $zoom = $surface.attr('zoomID') ? $("#" + $surface.attr('zoomID')) : undefined;
 			var $query = $surface.attr('queryID') ? $("#" + $surface.attr('queryID')) : undefined;
 			var $show = $('<a>').attr({href: 'javascript:void(0);'});
-			var $hide = $('<a>').attr({href: 'javascript:void(0);'});
+			var $hide = $('<a>').attr({href: "javascript:void(0);"});
 			var gmap;
 			var marker;
 			var hidden = $surface.attr('hidden') ? true : false;
@@ -64,34 +64,48 @@
 				var longitude = $surface.attr('longitude');
 				var latlng = new google.maps.LatLng(latitude, longitude);
 				return latlng;
-			};
+			}
 			function placeMarker(location){
-				var latlng = undefined;
-				if (location == undefined){
+				//var latlng = undefined;
+				if (location === undefined){
 					latlng = getInitialLocation();
 				}
 				else{
 					latlng = location;
 				}
 				marker.setPosition(latlng);
+				gmap.setCenter(marker.getPosition());
 				$latitude.val(latlng.lat());
 				$longitude.val(latlng.lng());
-			};
+			}
 			function createGoogleMap(){
 				var latlng = getInitialLocation();
 				var options = {
-					zoom:		parseInt($surface.attr('zoom')),
-					center:		latlng,
+					zoom: parseInt($surface.attr('zoom')),
+					scaleControl: false,
+					center:latlng,
 					mapTypeId:	google.maps.MapTypeId.ROADMAP
 				};
+
 				gmap = new google.maps.Map($surface.get(0), options);
-				// Add Maker
+
+				var pinImage = new google.maps.MarkerImage("http://www.google.com/mapfiles/marker.png",
+					new google.maps.Size(21, 34),
+					new google.maps.Point(0,0),
+					new google.maps.Point(10, 34));
+				var pinShadow = new google.maps.MarkerImage("http://www.google.com/mapfiles/shadow50.png",
+					new google.maps.Size(40, 37),
+					new google.maps.Point(0, 0),
+					new google.maps.Point(12, 35));
+
 				marker = new google.maps.Marker({
-					clickable:	false,
+					map: gmap,
+					icon:  pinImage,
+					shadow: pinShadow,
 					draggable:	editable,
-					map:		gmap,
-					position:	latlng
+					clickable:	false
 				});
+
 				// Events
 				if (editable) {
 					google.maps.event.addListener(gmap, 'rightclick', function(event){
@@ -104,7 +118,7 @@
 						placeMarker(event.latLng);
 					});
 				}
-			};
+			}
 				
 			function addShowHideButtons(){
 				$show.append($('<img style="vertical-align: middle">').attr({src: settings.visibility.show.src, alt: settings.visibility.show.alt, title: settings.visibility.show.title}));
@@ -116,7 +130,7 @@
 				// Append buttons
 				$surface.after($show).after($hide);
 				// Toggle
-				if($surface.css('display') == 'none'){
+				if($surface.css('display') === 'none'){
 					$show.show();
 					$hide.hide();
 				}else{
@@ -126,29 +140,32 @@
 				// Events
 				$show.click(showSurface);
 				$hide.click(hideSurface);
-			};
+			}
 			function showSurface(){
 				$surface.fadeIn('fast', function(){
 					google.maps.event.trigger(gmap, 'resize');
 					gmap.setZoom(gmap.getZoom());
+					gmap.panTo(marker.getPosition());
 				});
 				$show.hide('fast');
 				$hide.show('fast');
 				placeMarker();
-			};
+
+				
+			}
 			function hideSurface(){
 				$surface.fadeOut('fast');
 				$show.show('fast');
 				$hide.hide('fast');
-				if ($longitude != undefined) {
+				if ($longitude !== undefined) {
 					$longitude.val("");
 				}
-				if ($latitude != undefined) {
+				if ($latitude !== undefined) {
 					$latitude.val("");
 				}
-			};
+			}
 			function addGeocodeButton($query){
-				if($query == undefined){
+				if($query === undefined){
 					return;
 				}
 				$query.css({'margin-right': '5px'});
@@ -160,7 +177,7 @@
 				$submit.css({'display': 'inline-block', 'vertical-align': 'middle', 'width': '16px', 'height': '16px', 'margin-right': '5px'});
 				$submit.append($('<img>').attr({src: settings.query.submit.src, alt: settings.query.submit.alt, title: settings.query.submit.title}));
 				// Append these elements after the $query
-				$query.after($('<br />')).after('<small>Press TAB to submit address to a map</small>').after($error).after($loading).after($submit);
+				$query.after($('<br />')).after('<small>Press TAB to submit address to map</small>').after($error).after($loading).after($submit);
 				// Create Geocoder
 				var geocoder = new google.maps.Geocoder();
 				function geocode(){
@@ -170,32 +187,31 @@
 					geocoder.geocode({'address': query}, function(results, status){
 						$loading.hide();
 						$submit.show();
-						if (status == google.maps.GeocoderStatus.OK) {
+						if (status === google.maps.GeocoderStatus.OK) {
 							showSurface();
 							var latlng = results[0].geometry.location;
 							if (editable) {
 								placeMarker(latlng);
 							}
-							gmap.setCenter(latlng);
 							$error.hide();
 						}else{
 							$error.show();
 						}
 					});
-				};
+				}
 				$submit.click(geocode);
 				$query.keydown(function(e){
-					if (e.keyCode == 9) {
+					if (e.keyCode === 9) {
 						geocode();
 						return false;
 					}
 				});
 			}
 			// Modify surface size
-			if ($surface.width() == 0) {
+			if ($surface.width() === 0) {
 				$surface.css('width', settings.initial.width);
 			}
-			if ($surface.height() == 0){
+			if ($surface.height() === 0){
 				$surface.css('height', settings.initial.height);
 			}
 			createGoogleMap();
